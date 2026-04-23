@@ -170,7 +170,7 @@ const Login = () => {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: '20px', fontSize: '0.78rem', color: 'var(--text-muted)' }}>
-          © 2026 NexusHR Enterprise Suite
+          © 2026 PeopleCore Enterprise Suite
         </div>
       </div>
 

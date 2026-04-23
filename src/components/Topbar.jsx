@@ -16,7 +16,7 @@ const pageMeta = {
 
 const Topbar = () => {
   const location = useLocation();
-  const meta = pageMeta[location.pathname] || { title:'NexusHR', sub:'' };
+  const meta = pageMeta[location.pathname] || { title:'PeopleCore', sub:'' };
   const { user } = useAuth();
   const { stats } = useHRM();
   const [showNotifs, setShowNotifs] = useState(false);

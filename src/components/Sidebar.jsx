@@ -58,7 +58,7 @@ const Sidebar = () => {
           <Target color="white" size={21}/>
         </div>
         <div className="sidebar-brand-text">
-          <div className="sidebar-brand-name">NexusHR</div>
+          <div className="sidebar-brand-name">PeopleCore</div>
           <div className="sidebar-brand-sub">Enterprise Suite</div>
         </div>
       </div>

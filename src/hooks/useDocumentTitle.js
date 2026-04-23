@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 const useDocumentTitle = (pageTitle) => {
   useEffect(() => {
     const prev = document.title;
-    document.title = pageTitle ? `${pageTitle} — NexusHR` : 'NexusHR — Enterprise Suite';
+    document.title = pageTitle ? `${pageTitle} — PeopleCore` : 'PeopleCore — Enterprise Suite';
     return () => { document.title = prev; };
   }, [pageTitle]);
 };

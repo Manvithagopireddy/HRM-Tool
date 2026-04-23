@@ -48,10 +48,10 @@ const Settings = () => {
   const [saved, setSaved] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
-  const [profile, setProfile] = useState({ name:'Admin User', email:'admin@nexushr.com', phone:'+1 (555) 000-0000', role:'HR Manager', bio:'' });
+  const [profile, setProfile] = useState({ name:'Admin User', email:'admin@peoplecore.com', phone:'+1 (555) 000-0000', role:'HR Manager', bio:'' });
   const [notifs, setNotifs] = useState({ email:true, browser:true, payroll:true, attendance:false, recruitment:true, weekly:true });
   const [appearance, setAppearance] = useState({ theme:'dark', density:'default', animations:true, sidebar:'expanded' });
-  const [company, setCompany] = useState({ name:'NexusHR Corp', industry:'Technology', size:'51-200', timezone:'America/New_York', currency:'USD', website:'https://nexushr.com' });
+  const [company, setCompany] = useState({ name:'PeopleCore Corp', industry:'Technology', size:'51-200', timezone:'America/New_York', currency:'USD', website:'https://peoplecore.com' });
 
   const handleSave = () => {
     setSaved(true);

@@ -58,7 +58,7 @@ const PayslipModal = ({ record, onClose }) => {
           <div id="payslip-content" className="payslip">
             <div className="payslip-header">
               <div>
-                <div className="payslip-company">NexusHR</div>
+                <div className="payslip-company">PeopleCore</div>
                 <div style={{fontSize:'0.8rem',color:'#6b7280',marginTop:'4px'}}>123 Enterprise Blvd, New York, NY 10001</div>
               </div>
               <div className="payslip-title">

@@ -1,4 +1,4 @@
-# NexusHR — Enterprise Human Resource Management Suite
+# PeopleCore — Enterprise Human Resource Management Suite
 
 <div align="center">
   <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&style=for-the-badge" />
@@ -83,4 +83,4 @@ For production, replace the mock data layer with Firebase:
 
 ## 📄 License
 
-MIT © NexusHR
+MIT © PeopleCore
