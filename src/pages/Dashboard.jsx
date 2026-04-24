@@ -10,6 +10,7 @@ import {
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import { attendanceSummary, jobs } from '../data/mockData';
 import { useHRM } from '../context/HRMContext';
+import { useAuth } from '../context/AuthContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler, ArcElement);
@@ -45,7 +46,9 @@ const eventColors = { review:'var(--warning)', hr:'var(--success)', payroll:'var
 
 const Dashboard = () => {
   useDocumentTitle('Dashboard');
+  const { user } = useAuth();
   const { employees, stats } = useHRM();
+  const firstName = user?.name?.split(' ')[0] || 'there';
   const totalSalary = employees.reduce((a,e)=>a+Math.round(e.salary/12),0);
   const activeEmps = stats.activeEmployees;
   const avgAttendance = Math.round(attendanceSummary.reduce((a,e)=>a+(e.present/e.totalDays*100),0)/attendanceSummary.length);
@@ -56,9 +59,10 @@ const Dashboard = () => {
     datasets:[{
       label:'Headcount',
       data:[82,84,87,88,91,93,94,97,99,102,103,105],
-      borderColor:'#6366f1',
-      backgroundColor:'rgba(99,102,241,0.1)',
+      borderColor:'#e5e7eb',
+      backgroundColor:'rgba(255,255,255,0.06)',
       borderWidth:2, fill:true, tension:0.4,
+      pointBackgroundColor:'#ffffff',
     }]
   };
 
@@ -67,9 +71,10 @@ const Dashboard = () => {
     datasets:[{
       label:'Monthly Payroll ($k)',
       data:[198,205,210,220,225,232,240],
-      borderColor:'#10b981',
-      backgroundColor:'rgba(16,185,129,0.1)',
+      borderColor:'#9ca3af',
+      backgroundColor:'rgba(156,163,175,0.08)',
       borderWidth:2, fill:true, tension:0.4,
+      pointBackgroundColor:'#9ca3af',
     }]
   };
 
@@ -77,7 +82,7 @@ const Dashboard = () => {
     labels:['Engineering','Sales','Marketing','HR','Finance'],
     datasets:[{
       data:[45,25,15,8,12],
-      backgroundColor:['#6366f1','#10b981','#f59e0b','#f43f5e','#38bdf8'],
+      backgroundColor:['#f9fafb','#d1d5db','#9ca3af','#6b7280','#374151'],
       borderWidth:0, hoverOffset:4,
     }]
   };
@@ -85,13 +90,13 @@ const Dashboard = () => {
   const attendanceBar = {
     labels:['Mon','Tue','Wed','Thu','Fri'],
     datasets:[
-      { label:'Present', data:[98,96,94,99,91], backgroundColor:'rgba(16,185,129,0.8)', borderRadius:4 },
-      { label:'Absent', data:[2,3,5,1,7], backgroundColor:'rgba(244,63,94,0.6)', borderRadius:4 },
+      { label:'Present', data:[98,96,94,99,91], backgroundColor:'rgba(255,255,255,0.75)', borderRadius:4 },
+      { label:'Absent',  data:[2,3,5,1,7],      backgroundColor:'rgba(255,255,255,0.18)', borderRadius:4 },
     ]
   };
 
   const stackedOpts = {
-    ...barOpts, plugins:{...barOpts.plugins, legend:{display:true,labels:{color:'#94a3b8'}}},
+    ...barOpts, plugins:{...barOpts.plugins, legend:{display:true,labels:{color:'#9ca3af'}}},
     scales:{...barOpts.scales, x:{...barOpts.scales.x,stacked:true}, y:{...barOpts.scales.y,stacked:true}}
   };
 
@@ -102,7 +107,7 @@ const Dashboard = () => {
       <div className="page-header">
         <div className="page-header-left">
           <h1 className="page-title">Dashboard Overview</h1>
-          <div className="page-subtitle">Welcome back, Admin! Here's what's happening today.</div>
+          <div className="page-subtitle">Welcome back, {firstName}! Here&apos;s what&apos;s happening today.</div>
         </div>
         <div className="page-header-actions">
           <button className="btn btn-secondary"><Calendar size={16}/>Apr 2026</button>
@@ -112,32 +117,32 @@ const Dashboard = () => {
 
       {/* KPI Cards */}
       <div className="kpi-grid">
-        <div className="kpi-card accent-primary">
-          <div className="kpi-icon primary"><Users size={22}/></div>
+        <div className="kpi-card">
+          <div className="kpi-icon" style={{background:'rgba(255,255,255,0.08)',color:'#f9fafb'}}><Users size={22}/></div>
           <div className="kpi-body">
             <div className="kpi-value">{employees.length}</div>
             <div className="kpi-label">Total Employees</div>
             <div className="kpi-change up"><ArrowUpRight size={14}/>+3 this month</div>
           </div>
         </div>
-        <div className="kpi-card accent-success">
-          <div className="kpi-icon success"><UserCheck size={22}/></div>
+        <div className="kpi-card">
+          <div className="kpi-icon" style={{background:'rgba(255,255,255,0.08)',color:'#f9fafb'}}><UserCheck size={22}/></div>
           <div className="kpi-body">
             <div className="kpi-value">{avgAttendance}%</div>
             <div className="kpi-label">Attendance Rate</div>
             <div className="kpi-change up"><ArrowUpRight size={14}/>+2.1% vs last week</div>
           </div>
         </div>
-        <div className="kpi-card accent-warning">
-          <div className="kpi-icon warning"><Briefcase size={22}/></div>
+        <div className="kpi-card">
+          <div className="kpi-icon" style={{background:'rgba(255,255,255,0.08)',color:'#f9fafb'}}><Briefcase size={22}/></div>
           <div className="kpi-body">
             <div className="kpi-value">{openJobs}</div>
             <div className="kpi-label">Open Positions</div>
             <div className="kpi-change down"><ArrowDownRight size={14}/>3 filled last week</div>
           </div>
         </div>
-        <div className="kpi-card accent-info">
-          <div className="kpi-icon info"><TrendingUp size={22}/></div>
+        <div className="kpi-card">
+          <div className="kpi-icon" style={{background:'rgba(255,255,255,0.08)',color:'#f9fafb'}}><TrendingUp size={22}/></div>
           <div className="kpi-body">
             <div className="kpi-value">${(totalSalary/1000).toFixed(0)}k</div>
             <div className="kpi-label">Monthly Payroll</div>

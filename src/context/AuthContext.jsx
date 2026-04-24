@@ -5,8 +5,22 @@ const AuthContext = createContext(null);
 export const useAuth = () => useContext(AuthContext);
 
 const DEMO_USERS = [
-  { email: 'admin@nexushr.com', password: 'admin123', name: 'Admin User', role: 'HR Manager', avatar: 'AD', avatarColor: 'var(--grad-primary)' },
-  { email: 'hr@nexushr.com',    password: 'hr12345',  name: 'HR Staff',   role: 'HR Specialist', avatar: 'HS', avatarColor: '#10b981' },
+  {
+    email: 'admin@peoplecore.com',
+    password: 'admin123',
+    name: 'Admin User',
+    role: 'HR Manager',
+    avatar: 'AD',
+    avatarColor: '#2a2a2a',
+  },
+  {
+    email: 'hr@peoplecore.com',
+    password: 'hr12345',
+    name: 'HR Staff',
+    role: 'HR Specialist',
+    avatar: 'HS',
+    avatarColor: '#10b981',
+  },
 ];
 
 export const AuthProvider = ({ children }) => {
@@ -25,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       setError('');
       return true;
     }
-    setError('Invalid email or password.');
+    setError('Invalid email or password. Try the demo credentials below.');
     return false;
   };
 

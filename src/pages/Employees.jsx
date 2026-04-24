@@ -85,7 +85,7 @@ const ProfileDrawer = ({ employee, onClose }) => {
   return (
     <div className="modal-overlay" onClick={e=>e.target===e.currentTarget&&onClose()}>
       <div className="modal slide-up" style={{maxWidth:'420px'}}>
-        <div style={{background:'var(--grad-primary)',height:'100px',borderRadius:'var(--radius-xl) var(--radius-xl) 0 0',position:'relative'}}>
+        <div style={{background:'#1a1a1a',border:'1px solid rgba(255,255,255,0.08)',height:'100px',borderRadius:'var(--radius-xl) var(--radius-xl) 0 0',position:'relative'}}>
           <button className="modal-close" onClick={onClose} style={{position:'absolute',top:'12px',right:'12px'}}><X size={16}/></button>
         </div>
         <div style={{padding:'0 24px 24px',marginTop:'-36px'}}>

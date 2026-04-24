@@ -90,7 +90,7 @@ const Settings = () => {
             <>
               <Section title="Personal Information">
                 <div style={{display:'flex',alignItems:'center',gap:'16px',marginBottom:'20px',padding:'16px',background:'var(--bg-surface)',borderRadius:'var(--radius-md)',border:'1px solid var(--border)'}}>
-                  <div className="avatar avatar-xl" style={{background:'var(--grad-primary)',color:'white'}}>AD</div>
+                  <div className="avatar avatar-xl" style={{background:'#2a2a2a',border:'1px solid rgba(255,255,255,0.15)',color:'#f9fafb'}}>AD</div>
                   <div>
                     <button className="btn btn-sm btn-secondary">Change Photo</button>
                     <div style={{fontSize:'0.75rem',color:'var(--text-muted)',marginTop:'6px'}}>JPG, PNG up to 2MB</div>

@@ -4,11 +4,11 @@ import { useHRM } from '../context/HRMContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const DEPT_COLORS = {
-  Engineering: '#6366f1',
-  Sales: '#f59e0b',
-  Marketing: '#38bdf8',
-  HR: '#f43f5e',
-  Finance: '#10b981',
+  Engineering: '#e5e7eb',
+  Sales:       '#9ca3af',
+  Marketing:   '#6b7280',
+  HR:          '#4b5563',
+  Finance:     '#374151',
 };
 
 // Build tree: CEO > VP-level > rest
@@ -20,8 +20,8 @@ const buildTree = (employees) => {
     role: 'Chief Executive Officer',
     department: 'Executive',
     avatar: 'AP',
-    avatarColor: '#6366f1',
-    email: 'ceo@nexushr.com',
+    avatarColor: '#374151',
+    email: 'ceo@peoplecore.com',
     location: 'New York',
     children: vps.map(vp => ({
       ...vp,
@@ -121,16 +121,16 @@ export default function OrgChart() {
   }, {});
 
   return (
-    <div className="page-content">
+    <div className="fade-in">
       <div className="page-header">
         <div className="page-header-left">
-          <h1 className="page-title">Organization Chart</h1>
+          <h1 className="page-title">Org Chart</h1>
           <p className="page-subtitle">Company hierarchy, team structures, and reporting lines</p>
         </div>
         <div className="page-header-actions">
           <div className="tabs" style={{ marginBottom: 0 }}>
             <button className={`tab-btn ${view === 'chart' ? 'active' : ''}`} onClick={() => setView('chart')}>
-              <Users size={14} /> Org Chart
+              <Users size={14} /> Tree View
             </button>
             <button className={`tab-btn ${view === 'dept' ? 'active' : ''}`} onClick={() => setView('dept')}>
               <Building size={14} /> By Department
@@ -156,8 +156,8 @@ export default function OrgChart() {
                 <div className="card-header">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <div style={{
-                      width: '10px', height: '10px', borderRadius: '50%',
-                      background: color, boxShadow: `0 0 8px ${color}`,
+                      width: '8px', height: '8px', borderRadius: '50%',
+                      background: color, flexShrink: 0,
                     }} />
                     <div className="card-title">{dept}</div>
                     <span className="badge" style={{ background: color + '20', color }}>{emps.length} members</span>

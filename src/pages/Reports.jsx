@@ -47,34 +47,27 @@ export default function Reports() {
   const [period, setPeriod] = useState('6m');
   const [activeReport, setActiveReport] = useState('overview');
 
-  // Headcount by month (simulated growth)
   const headcountData = {
     labels: MONTHS,
     datasets: [{
       label: 'Total Headcount',
       data: [employees.length - 4, employees.length - 3, employees.length - 2, employees.length - 1, employees.length, employees.length + 1],
-      borderColor: '#6366f1',
-      backgroundColor: 'rgba(99,102,241,0.1)',
-      fill: true,
-      tension: 0.4,
-      pointBackgroundColor: '#6366f1',
-      pointRadius: 5,
+      borderColor: '#e5e7eb',
+      backgroundColor: 'rgba(255,255,255,0.06)',
+      fill: true, tension: 0.4, pointBackgroundColor: '#ffffff', pointRadius: 5,
     }, {
       label: 'New Hires',
       data: [1, 2, 0, 1, 2, 1],
-      borderColor: '#10b981',
-      backgroundColor: 'rgba(16,185,129,0.1)',
-      fill: true,
-      tension: 0.4,
-      pointBackgroundColor: '#10b981',
-      pointRadius: 5,
+      borderColor: '#9ca3af',
+      backgroundColor: 'rgba(156,163,175,0.08)',
+      fill: true, tension: 0.4, pointBackgroundColor: '#9ca3af', pointRadius: 5,
     }],
   };
 
   // Department distribution
   const deptMap = {};
   employees.forEach(e => { deptMap[e.department] = (deptMap[e.department] || 0) + 1; });
-  const deptColors = ['#6366f1', '#10b981', '#f59e0b', '#f43f5e', '#38bdf8', '#8b5cf6'];
+  const deptColors = ['#f9fafb', '#d1d5db', '#9ca3af', '#6b7280', '#374151', '#1f2937'];
   const deptData = {
     labels: Object.keys(deptMap),
     datasets: [{
@@ -92,19 +85,17 @@ export default function Reports() {
     datasets: [{
       label: 'Payroll Cost ($)',
       data: [monthlyPayroll * 0.94, monthlyPayroll * 0.96, monthlyPayroll * 0.97, monthlyPayroll * 0.98, monthlyPayroll * 0.99, monthlyPayroll],
-      backgroundColor: MONTHS.map((_, i) => i === MONTHS.length - 1 ? 'rgba(99,102,241,0.85)' : 'rgba(99,102,241,0.35)'),
-      borderRadius: 6,
-      borderSkipped: false,
+      backgroundColor: MONTHS.map((_, i) => i === MONTHS.length - 1 ? 'rgba(255,255,255,0.75)' : 'rgba(255,255,255,0.25)'),
+      borderRadius: 6, borderSkipped: false,
     }],
   };
 
-  // Attendance overview
   const attendanceData = {
     labels: MONTHS,
     datasets: [
-      { label: 'Present', data: [92, 88, 94, 91, 93, 95], backgroundColor: 'rgba(16,185,129,0.7)', borderRadius: 4 },
-      { label: 'Absent', data: [4, 6, 3, 5, 4, 3], backgroundColor: 'rgba(244,63,94,0.7)', borderRadius: 4 },
-      { label: 'Late', data: [4, 6, 3, 4, 3, 2], backgroundColor: 'rgba(245,158,11,0.7)', borderRadius: 4 },
+      { label: 'Present', data: [92, 88, 94, 91, 93, 95], backgroundColor: 'rgba(255,255,255,0.7)',  borderRadius: 4 },
+      { label: 'Absent',  data: [4, 6, 3, 5, 4, 3],       backgroundColor: 'rgba(255,255,255,0.2)',  borderRadius: 4 },
+      { label: 'Late',    data: [4, 6, 3, 4, 3, 2],        backgroundColor: 'rgba(255,255,255,0.08)', borderRadius: 4 },
     ],
   };
 
@@ -167,7 +158,7 @@ export default function Reports() {
   };
 
   return (
-    <div className="page-content">
+    <div className="fade-in">
       {/* Header */}
       <div className="page-header">
         <div className="page-header-left">
@@ -197,18 +188,18 @@ export default function Reports() {
       {/* Summary KPIs */}
       <div className="kpi-grid" style={{gridTemplateColumns:'repeat(4,1fr)'}}>
         {summaryCards.map(card => (
-          <div key={card.label} className={`kpi-card accent-${card.color}`}>
-            <div className={`kpi-icon ${card.color}`}>{card.icon}</div>
-            <div className="kpi-body">
-              <div className="kpi-value">{card.value}</div>
-              <div className="kpi-label">{card.label}</div>
-              <div className={`kpi-change ${card.up ? 'up' : 'down'}`}>
-                {card.up ? <ArrowUpRight size={12}/> : <ArrowDownRight size={12}/>}
-                {card.change}
-              </div>
+        <div key={card.label} className="kpi-card">
+          <div className="kpi-icon" style={{background:'rgba(255,255,255,0.07)',color:'#e5e7eb'}}>{card.icon}</div>
+          <div className="kpi-body">
+            <div className="kpi-value">{card.value}</div>
+            <div className="kpi-label">{card.label}</div>
+            <div className={`kpi-change ${card.up ? 'up' : 'down'}`}>
+              {card.up ? <ArrowUpRight size={12}/> : <ArrowDownRight size={12}/>}
+              {card.change}
             </div>
           </div>
-        ))}
+        </div>
+      ))}
       </div>
 
       {/* Report Tabs */}

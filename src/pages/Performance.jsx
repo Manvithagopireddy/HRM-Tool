@@ -15,7 +15,7 @@ import {
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 const RATING_LABELS = ['', 'Below Expectations', 'Needs Improvement', 'Meets Expectations', 'Exceeds Expectations', 'Outstanding'];
-const RATING_COLORS = ['', '#f43f5e', '#f59e0b', '#38bdf8', '#10b981', '#6366f1'];
+const RATING_COLORS = ['', '#f87171', '#fbbf24', '#9ca3af', '#e5e7eb', '#ffffff'];
 
 const initialReviews = [
   { id: 'REV001', empId: 'EMP001', empName: 'Jane Smith', department: 'Engineering', avatar: 'JS', avatarColor: '#6366f1', period: 'Q1 2026', overallRating: 5, technical: 5, communication: 4, leadership: 4, teamwork: 5, innovation: 5, status: 'Completed', reviewer: 'David Chen', comments: 'Outstanding performance. Delivered major features ahead of schedule.' },
@@ -115,9 +115,9 @@ export default function Performance() {
     datasets: [{
       label: selectedEmp.empName,
       data: [selectedEmp.technical, selectedEmp.communication, selectedEmp.leadership, selectedEmp.teamwork, selectedEmp.innovation],
-      backgroundColor: 'rgba(99,102,241,0.15)',
-      borderColor: '#6366f1',
-      pointBackgroundColor: '#6366f1',
+      backgroundColor: 'rgba(255,255,255,0.06)',
+      borderColor: '#e5e7eb',
+      pointBackgroundColor: '#ffffff',
       pointRadius: 5,
     }],
   } : null;
@@ -137,7 +137,7 @@ export default function Performance() {
   };
 
   return (
-    <div className="page-content">
+    <div className="fade-in">
       {/* Header */}
       <div className="page-header">
         <div className="page-header-left">
@@ -302,7 +302,7 @@ export default function Performance() {
                   key={rev.id}
                   onClick={() => setSelectedEmp(rev)}
                   className="perf-emp-row"
-                  style={{ background: selectedEmp?.id === rev.id ? 'var(--accent-primary-soft)' : 'transparent', borderColor: selectedEmp?.id === rev.id ? 'var(--accent-primary)' : 'var(--border)' }}
+                  style={{ background: selectedEmp?.id === rev.id ? 'rgba(255,255,255,0.07)' : 'transparent', borderColor: selectedEmp?.id === rev.id ? 'rgba(255,255,255,0.25)' : 'var(--border)' }}
                 >
                   <div className="avatar avatar-sm" style={{ background: rev.avatarColor, color: 'white' }}>{rev.avatar}</div>
                   <div style={{ flex: 1 }}>
