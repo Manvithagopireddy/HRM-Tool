@@ -1,27 +1,9 @@
 import React, { createContext, useContext, useState } from 'react';
+import { authApi } from '../utils/api';
 
 const AuthContext = createContext(null);
 
 export const useAuth = () => useContext(AuthContext);
-
-const DEMO_USERS = [
-  {
-    email: 'admin@peoplecore.com',
-    password: 'admin123',
-    name: 'Admin User',
-    role: 'HR Manager',
-    avatar: 'AD',
-    avatarColor: '#2a2a2a',
-  },
-  {
-    email: 'hr@peoplecore.com',
-    password: 'hr12345',
-    name: 'HR Staff',
-    role: 'HR Specialist',
-    avatar: 'HS',
-    avatarColor: '#10b981',
-  },
-];
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
@@ -30,22 +12,26 @@ export const AuthProvider = ({ children }) => {
   });
   const [error, setError] = useState('');
 
-  const login = (email, password) => {
-    const found = DEMO_USERS.find(u => u.email === email && u.password === password);
-    if (found) {
-      const { password: _, ...safe } = found;
-      setUser(safe);
-      localStorage.setItem('hrm_user', JSON.stringify(safe));
+  const login = async (email, password) => {
+    try {
+      const response = await authApi.login(email, password);
+      const { token, ...userData } = response;
+      setUser(userData);
+      localStorage.setItem('hrm_user', JSON.stringify(userData));
+      localStorage.setItem('hrm_jwt', token);
       setError('');
       return true;
+    } catch (err) {
+      console.error('Login error:', err);
+      setError(err.message || 'Invalid email or password.');
+      return false;
     }
-    setError('Invalid email or password. Try the demo credentials below.');
-    return false;
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('hrm_user');
+    localStorage.removeItem('hrm_jwt');
   };
 
   return (

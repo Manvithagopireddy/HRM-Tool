@@ -1,0 +1,92 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: peoplecore-hrm
+
+  # ── Database (H2 in-memory for development) ──────────────────────────────
+  datasource:
+    url: jdbc:h2:mem:hrmdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop          # recreate schema on every restart (dev only)
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always                   # run data.sql seed on every start
+
+  # ── Jackson ──────────────────────────────────────────────────────────────
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
+# ── JWT ──────────────────────────────────────────────────────────────────────
+jwt:
+  secret: "PeopleCoreHRM_SuperSecret_JWT_Key_2026_ChangeInProduction!!"
+  expiration-ms: 86400000            # 24 hours
+
+# ── CORS (allow Vite dev server) ─────────────────────────────────────────────
+cors:
+  allowed-origins:
+    - "http://localhost:5173"
+    - "http://localhost:3000"
+
+# ── Actuator ─────────────────────────────────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.peoplecore: DEBUG
+    org.springframework.security: INFO
+    org.springframework.web: INFO
+
+---
+# ── PostgreSQL production profile ──────────────────────────────────────────
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/hrmdb}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  h2:
+    console:
+      enabled: false
